@@ -8,40 +8,64 @@ export default function WhitePaperPage() {
   return (
     <>
       <Header />
-      <main>
-      {/* Section 1 – vision and bullet list */}
-      <section className="relative bg-white" style={{ height: 409 }}>
-        <div style={{ paddingLeft: 110, paddingRight: 110 }}>
-          <div style={{ height: 329, marginTop: 80, position: 'relative' }}>
+      <main className="whitepaper-page">
+      {/* Section 1 – vision and bullet list - Responsive */}
+      <section className="relative bg-white py-16 lg:py-0" style={{ height: 'auto' }}>
+        <div className="px-110">
+          <div className="relative" style={{ marginTop: 'auto', position: 'relative' }}>
             <div>
-              <div style={{ position: 'relative', marginTop: 24, marginBottom: 10, marginLeft: 10, marginRight: 10, width: 1276 }}>
-                {/* Title */}
-                <Typewriter as="p" text={"At SoraTech, We envision a future where anyone, anywhere can:"} speedMsPerChar={22} cursorWidthPx={10} style={{ fontSize: 32, lineHeight: '45px', marginBottom: 10, fontWeight: 900 }} />
+              <div className="relative max-w-full" style={{ marginTop: 24, marginBottom: 10, marginLeft: 10, marginRight: 10 }}>
+                {/* Title - Responsive */}
+                <Typewriter 
+                  as="p" 
+                  text={"At SoraTech, We envision a future where anyone, anywhere can:"} 
+                  speedMsPerChar={22} 
+                  cursorWidthPx={10} 
+                  className="text-center lg:text-left"
+                  style={{ 
+                    fontSize: 'clamp(24px, 5vw, 32px)', 
+                    lineHeight: 'clamp(32px, 6vw, 45px)', 
+                    marginBottom: 10, 
+                    fontWeight: 900 
+                  }} 
+                />
 
-                {/* Text block with small delay */}
-                <AnimateOnView as="div" variant="slide-up" delay={1}>
+                {/* Text block with small delay - Responsive */}
+                <AnimateOnView as="div" variant="slide-up" delay={1} className="text-center lg:text-left">
                   <p style={{ fontSize: 13, lineHeight: '17px' }}>&nbsp;</p>
-                  <ul style={{ fontSize: 15, marginLeft: 8, listStyleType: 'disc' }}>
-                    <li style={{ marginLeft: 20, lineHeight: '23px' }}>
+                  <ul className="max-w-lg mx-auto lg:mx-0" style={{ fontSize: 15, marginLeft: 8, listStyleType: 'disc' }}>
+                    <li style={{ marginLeft: 20, lineHeight: '23px', marginBottom: 8 }}>
                       <p style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>Issue real assets onchain</p>
                     </li>
-                    <li style={{ marginLeft: 20, lineHeight: '23px' }}>
+                    <li style={{ marginLeft: 20, lineHeight: '23px', marginBottom: 8 }}>
                       <p style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>Access previously exclusive markets</p>
                     </li>
-                    <li style={{ marginLeft: 20, lineHeight: '23px' }}>
+                    <li style={{ marginLeft: 20, lineHeight: '23px', marginBottom: 8 }}>
                       <p style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>Build protocols around real-world primitives</p>
                     </li>
-                    <li style={{ marginLeft: 20, lineHeight: '23px' }}>
+                    <li style={{ marginLeft: 20, lineHeight: '23px', marginBottom: 8 }}>
                       <p style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>Earn real yield from tangible economic activity</p>
                     </li>
                   </ul>
                   <p style={{ fontSize: 15, lineHeight: '23px' }}>&nbsp;</p>
-                  <p style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>We’re not just building tools—we’re building a new financial system.</p>
+                  <p className="max-w-lg mx-auto lg:mx-0" style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>We're not just building tools—we're building a new financial system.</p>
                 </AnimateOnView>
 
-                {/* Button after text with its own animation */}
-                <AnimateOnView as="div" variant="slide-right" delay={2} style={{ position: 'absolute', left: 603, bottom: 0, width: 485, height: 48 }}>
-                  <a href="/assets/pdf/WhitePaper.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center btn-invert btn-invert--white" style={{ width: '100%', height: '100%' }}>
+                {/* Button after text - Responsive positioning */}
+                <AnimateOnView 
+                  as="div" 
+                  variant="slide-right" 
+                  delay={2} 
+                  className="mt-8 flex justify-center lg:justify-start"
+                  style={{ position: 'relative' }}
+                >
+                  <a 
+                    href="/assets/pdf/WhitePaper.pdf" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center justify-center btn-invert btn-invert--white w-full max-w-md lg:w-auto" 
+                    style={{ height: 48, padding: '0 32px' }}
+                  >
                     <span style={{ fontSize: 16, lineHeight: '24px' }}>Download White Paper</span>
                   </a>
                 </AnimateOnView>
@@ -53,8 +77,8 @@ export default function WhitePaperPage() {
         </div>
       </section>
 
-      {/* Section 2 – full width background image 750 height */}
-      <section className="relative" style={{ height: 750 }}>
+      {/* Section 2 – full width background image - Responsive */}
+      <section className="relative" style={{ height: 'clamp(600px, 50vh, 750px)' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
           <Image src="/assets/images/whitepaper-abstract-lines.jpg" alt="Abstract Lines" fill style={{ objectFit: 'cover' }} />
         </div>

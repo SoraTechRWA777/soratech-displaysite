@@ -34,27 +34,27 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section id="home" className="relative" style={{ backgroundColor: '#fff', marginBottom: 0 }}>
-            {/* Main Content area with 120px side paddings */}
+            {/* Main Content area with responsive paddings */}
           <div className="relative z-10 px-120">
-            {/* Title block (1452w x 238h) with bigger top gap and smaller bottom gap */}
+            {/* Title block with responsive height */}
             <div className="h-238" style={{ marginTop: 36, marginBottom: 0 }}>
-              <AnimateOnView as="h1" variant="fade-in" className="h1-hero" style={{ fontWeight: 900, color: '#000' }}>
+              <AnimateOnView as="h1" variant="fade-in" className="h1-hero text-center lg:text-left" style={{ fontWeight: 900, color: '#000' }}>
                 SORATECH RWA
               </AnimateOnView>
             </div>
 
-            {/* Subtitle + CTA row (1452w x 155h) */}
-            <div className="grid grid-cols-2 h-155">
-              {/* Left: subtitle (593w x 23h), offset ~23px from column left */}
-              <div className="flex items-start">
+            {/* Subtitle + CTA row - responsive grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 h-155 gap-4 lg:gap-0">
+              {/* Left: subtitle - responsive positioning */}
+              <div className="flex items-start justify-center lg:justify-start">
                 <AnimateOnView as="p" className="" variant="fade-in" delay={1}>
-                  <span className="subtitle-hero" style={{ marginTop: 41, marginLeft: 23, display: 'inline-block' }}>
+                  <span className="subtitle-hero block text-center lg:text-left" style={{ marginTop: 41, display: 'inline-block' }}>
                   We Make Real World Assets, Onchain.
                   </span>
                 </AnimateOnView>
               </div>
-              {/* Right: CTA 160x50 aligned right with ~28px top offset */}
-              <div className="flex items-start justify-end">
+              {/* Right: CTA - responsive positioning */}
+              <div className="flex items-start justify-center lg:justify-end">
                 <a href="#about" aria-label="Learn more" className="btn-invert btn-invert--white inline-flex items-center justify-center btn-160x50 mt-28">
                   <span className="text-16-24">
                     Learn more
@@ -68,7 +68,7 @@ export default function Home() {
         {/* Media Hero Section (video + parallax image) */}
         <HeroMedia />
 
-        {/* About Section - EXACT MATCH, aligned container with hero */}
+        {/* About Section - Responsive */}
         <section
           id="about"
           className="Oqnisf section"
@@ -77,19 +77,28 @@ export default function Home() {
             backgroundColor: 'rgb(245, 245, 245)',
           }}
         >
-          {/* Content band 1472px with 110px side paddings */}
+          {/* Content band responsive with paddings */}
           <div className="px-110">
-            <div className="grid grid-cols-2">
-              {/* Left: image slightly bigger, closer to right column */}
-              <div className="relative" style={{ minHeight: 535 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+              {/* Left: image - responsive sizing */}
+              <div className="relative flex justify-center lg:justify-start" style={{ minHeight: 'auto' }}>
                 <div
+                  className="w-full max-w-[660px] lg:absolute"
                   style={{
+                    position: 'relative',
+                    top: 'auto',
+                    left: 'auto',
+                    width: '100%',
+                    maxWidth: '660px',
+                    height: 'auto',
+                    overflow: 'hidden',
+                  }}
+                  data-desktop-style={{
                     position: 'absolute',
                     top: 58,
                     left: 20,
                     width: 660,
                     height: 477,
-                    overflow: 'hidden',
                   }}
                 >
                 <Image 
@@ -97,29 +106,29 @@ export default function Home() {
                   alt="Professional woman working with technology"
                     width={660}
                     height={477}
-                    className="object-cover"
+                    className="object-cover w-full h-auto lg:w-[660px] lg:h-[477px]"
                   />
                 </div>
               </div>
 
-              {/* Right: vertically center to image block, reduced left offset */}
+              {/* Right: text content - responsive positioning */}
               <div className="relative">
-                <div style={{ marginTop: 58, height: 477 }} className="flex items-center">
-              <div>
+                <div className="flex items-center justify-center lg:justify-start" style={{ marginTop: 0, height: 'auto' }}>
+              <div className="text-center lg:text-left">
                     <Typewriter
                       as="h2"
                       text="About SoraTech"
                       speedMsPerChar={40}
                       cursorWidthPx={10}
-                      className="h2-66 ml-10"
+                      className="h2-66 ml-10 text-center lg:text-left"
                       style={{ marginTop: 0, marginBottom: 24, fontWeight: 700, color: '#000' }}
                     />
                     <AnimateOnView
                       as="p"
                       variant="zoom-in"
                       delay={1}
-                      className="text-33b ml-10"
-                      style={{ maxWidth: 900, color: '#000' }}
+                      className="text-33b ml-10 text-center lg:text-left"
+                      style={{ maxWidth: 900, color: '#000', margin: '0 auto' }}
                     >
                       We are dedicated to providing solutions that designed to
                       be a modular, compliant, and user-friendly infrastructure
@@ -134,16 +143,16 @@ export default function Home() {
 
         {/* Media Hero legacy block removed (replaced by <HeroMedia />) */}
 
-        {/* The Problem — pixel-perfect per provided spec */}
-        <section id="problem" className="relative bg-white h-565">
-          {/* Heading block: container aligned with 110px side margin; heading left offset 42px */}
+        {/* The Problem — Responsive */}
+        <section id="problem" className="relative bg-white h-565 py-16 lg:py-0">
+          {/* Heading block: responsive container */}
           <div className="px-110">
             <div className="mt-86 mb-64">
               <AnimateOnView
                 as="h2"
                 variant="slide-left"
+                className="ml-42 text-center lg:text-left"
                 style={{
-                  marginLeft: 42,
                   fontSize: 66,
                   lineHeight: '73px',
                   letterSpacing: '-2px',
@@ -157,27 +166,27 @@ export default function Home() {
               </AnimateOnView>
             </div>
 
-            {/* Intro paragraph: left offset 74px, size 33/43, bold, 65px bottom spacing */}
+            {/* Intro paragraph: responsive positioning */}
             <AnimateOnView
               as="p"
               variant="slide-up"
               delay={1}
-              className="text-33b ml-74"
-              style={{ color: '#000', marginBottom: 65 }}
+              className="text-33b ml-74 text-center lg:text-left"
+              style={{ color: '#000', marginBottom: 65, margin: '0 auto 65px' }}
             >
               Despite rapid growth in DeFi, most real-world assets remain locked
               in traditional systems:
             </AnimateOnView>
 
-            {/* Bullet list: container left offset ~73px; font 18 with 27px line height; no extra top margin */}
+            {/* Bullet list: responsive spacing */}
             <AnimateOnView
               as="ul"
               variant="fade-in"
               delay={2}
-              className="ml-73 ul-disc text-black"
+              className="ml-73 ul-disc text-black max-w-4xl mx-auto lg:mx-0"
               style={{ marginTop: 0, fontSize: 18, lineHeight: '27px' }}
             >
-              <li className="li-ml-23">
+              <li className="li-ml-23 mb-4">
                 <p
                   style={{
                     margin: 0,
@@ -191,7 +200,7 @@ export default function Home() {
                   </span>
                 </p>
                 </li>
-              <li className="li-ml-23">
+              <li className="li-ml-23 mb-4">
                 <p
                   style={{
                     margin: 0,
@@ -205,7 +214,7 @@ export default function Home() {
                   </span>
                 </p>
                 </li>
-              <li className="li-ml-23">
+              <li className="li-ml-23 mb-4">
                 <p
                   style={{
                     margin: 0,
@@ -219,7 +228,7 @@ export default function Home() {
                   </span>
                 </p>
                 </li>
-              <li className="li-ml-23">
+              <li className="li-ml-23 mb-4">
                 <p
                   style={{
                     margin: 0,
@@ -237,9 +246,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Solution Section - pixel-perfect per provided spec */}
-        <section id="solution" className="relative text-white h-766" style={{ backgroundColor: '#000' }}>
-          {/* Container paddings match other sections: 110px sides, adjust top padding to 22px */}
+        {/* Solution Section - Responsive */}
+        <section id="solution" className="relative text-white h-766 py-16 lg:py-0" style={{ backgroundColor: '#000' }}>
+          {/* Container paddings responsive */}
           <div className="px-110" style={{ paddingTop: 88 }}>
             <div style={{ marginBottom: 7 }}>
                 <Typewriter
@@ -252,13 +261,13 @@ export default function Home() {
                 />
             </div>
 
-            {/* Intro paragraph 33/43 bold; positioned with left offset (655 inside 110px padded container) */}
+            {/* Intro paragraph - responsive positioning */}
             <AnimateOnView
               as="p"
               variant="zoom-in"
               delay={1}
-              className="text-33b ml-655"
-              style={{ marginTop: 52, maxWidth: 780, color: '#fff', marginBottom: 10 }}
+              className="text-33b ml-655 text-center lg:text-left max-w-4xl mx-auto lg:mx-0"
+              style={{ marginTop: 52, maxWidth: 780, color: '#fff', marginBottom: 10, margin: '52px auto 10px' }}
             >
               We are building an open RWA infrastructure that solves these
               problems through{' '}
@@ -276,92 +285,77 @@ export default function Home() {
             {/* Divider line (left/right margins 10) */}
             <AnimateOnView as="div" variant="line-reveal" delay={1} className="ml-10 mr-10" style={{ marginTop: 36, color: '#fff' }} />
 
-            {/* Row 1: subheading + bullets (294px | 1178px) with bullets wrapper offset 394px */}
-            <AnimateOnView
-              as="div"
-              variant="slide-up"
-              className="grid grid-294-1178"
-              style={{ marginTop: 20 }}
-            >
+            {/* Row 1: subheading + bullets - responsive layout */}
+             <AnimateOnView
+               as="div"
+               variant="slide-up"
+               className="grid grid-cols-1 md:grid-cols-2 lg:grid-294-1178 grid-294-1fr-lg gap-4 lg:gap-0"
+               style={{ marginTop: 20 }}
+             >
               <div>
-                <h3 className="ml-10" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
+                <h3 className="ml-10 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
                   1. Compliant Tokenization
                 </h3>
               </div>
               <div>
-                <div style={{ marginLeft: 394, width: 500, height: 68 }}>
-                  <ul className="ul-ml-8" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
-                    <li className="li-ml-20">KYC/AML checks built-in</li>
-                    <li className="li-ml-20">
+                <div className="max-w-lg mx-auto lg:mx-0" style={{ marginLeft: 0, width: '100%', height: 'auto' }}>
+                   <ul className="list-none md:list-disc marker:text-white md:pl-5 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
+                     <li className="md:ml-0">KYC/AML checks built-in</li>
+                     <li className="md:ml-0">
                       Jurisdictional design via ADGM (UAE), Swiss Trust, and
                       local entities
                     </li>
-                    <li className="li-ml-20">
-                      Modular legal templates for asset issuers
-                    </li>
+                     <li className="md:ml-0">Modular legal templates for asset issuers</li>
                 </ul>
                 </div>
               </div>
             </AnimateOnView>
 
             {/* Divider */}
-            <AnimateOnView as="div" variant="line-reveal" delay={2} className="ml-10 mr-10" style={{ marginTop: 26, marginBottom: 13, color: '#fff' }} />
+             <AnimateOnView as="div" variant="line-reveal" delay={2} className="ml-10 mr-10" style={{ marginTop: 26, marginBottom: 13, color: '#fff' }} />
 
-            {/* Row 2 */}
-            <AnimateOnView
-              as="div"
-              variant="slide-up"
-              className="grid grid-294-1178"
-            >
+             {/* Row 2 */}
+             <AnimateOnView
+               as="div"
+               variant="slide-up"
+               className="grid grid-cols-1 md:grid-cols-2 lg:grid-294-1178 grid-294-1fr-lg gap-4 lg:gap-0"
+             >
               <div>
-                <h3 className="ml-10" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
+                <h3 className="ml-10 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
                   2. Modular Liquidity Engine
                 </h3>
               </div>
               <div>
-                <div style={{ marginLeft: 394, width: 500 }}>
-                  <ul className="ul-ml-8" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
-                    <li className="li-ml-20">
-                      Support for Bonding Curve, CLMM, and Orderbook-based AMMs
-                    </li>
-                    <li className="li-ml-20">
-                      Seamless integration with Solana aggregators (e.g.,
-                      Jupiter)
-                    </li>
-                    <li className="li-ml-20">
-                      Permissionless liquidity provisioning
-                    </li>
+                <div className="max-w-lg mx-auto lg:mx-0" style={{ marginLeft: 0, width: '100%' }}>
+                   <ul className="list-none md:list-disc marker:text-white md:pl-5 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
+                     <li className="md:ml-0">Support for Bonding Curve, CLMM, and Orderbook-based AMMs</li>
+                     <li className="md:ml-0">Seamless integration with Solana aggregators (e.g., Jupiter)</li>
+                     <li className="md:ml-0">Permissionless liquidity provisioning</li>
                 </ul>
                 </div>
               </div>
             </AnimateOnView>
 
             {/* Divider */}
-            <AnimateOnView as="div" variant="line-reveal" delay={3} className="ml-10 mr-10" style={{ marginTop: 26, marginBottom: 13, color: '#fff' }} />
+             <AnimateOnView as="div" variant="line-reveal" delay={3} className="ml-10 mr-10" style={{ marginTop: 26, marginBottom: 13, color: '#fff' }} />
 
-            {/* Row 3 */}
-            <AnimateOnView
-              as="div"
-              variant="slide-up"
-              className="grid grid-294-1178"
-            >
+             {/* Row 3 */}
+             <AnimateOnView
+               as="div"
+               variant="slide-up"
+               className="grid grid-cols-1 md:grid-cols-2 lg:grid-294-1178 grid-294-1fr-lg gap-4 lg:gap-0"
+             >
               <div>
-                <h3 className="ml-10" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
+                <h3 className="ml-10 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px', marginBottom: 0 }}>
                   3. Creator Tools
                 </h3>
               </div>
               <div>
-                <div style={{ marginLeft: 394, width: 500 }}>
-                  <ul className="ul-ml-8" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
-                    <li className="li-ml-20">
-                      One-click asset token creation
-                    </li>
-                    <li className="li-ml-20">
-                      NFT-style experience for asset wrappers
-                    </li>
-                    <li className="li-ml-20">
-                      Airdrop, presale, and vesting modules
-                    </li>
+                <div className="max-w-lg mx-auto lg:mx-0" style={{ marginLeft: 0, width: '100%' }}>
+                   <ul className="list-none md:list-disc marker:text-white md:pl-5 text-center lg:text-left" style={{ color: '#fff', fontSize: 15, lineHeight: '23px' }}>
+                     <li className="md:ml-0">One-click asset token creation</li>
+                     <li className="md:ml-0">NFT-style experience for asset wrappers</li>
+                     <li className="md:ml-0">Airdrop, presale, and vesting modules</li>
                 </ul>
               </div>
             </div>
@@ -372,28 +366,21 @@ export default function Home() {
         {/* Divider */}
         <div className="border-t border-black/10" />
 
-        {/* White Paper Section - exact paddings and alignment */}
+        {/* White Paper Section - responsive (match Build on) */}
         <section id="whitepaper" className="relative bg-white h-149">
           <div className="px-110">
-            <div className="grid grid-736-736 h-99 mt-19 mb-31">
-              <div className="flex items-center" style={{ width: 736 }}>
+            <div className="grid grid-cols-1 lg:grid-736-736 h-99 mt-19 mb-31 gap-4 lg:gap-0">
+              <div className="flex items-center justify-center lg:justify-start">
                 <Typewriter
                   as="h2"
                   text="White Paper"
                   speedMsPerChar={40}
                   cursorWidthPx={10}
-                  className="ml-10 h2-66 mt-26"
+                  className="ml-10 h2-66 mt-26 text-center lg:text-left"
                   style={{ fontWeight: 900, color: '#000', marginBottom: 0 }}
                 />
               </div>
-              <div
-                className="flex"
-                style={{
-                  width: 736,
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                }}
-              >
+              <div className="flex justify-center lg:justify-start items-start">
                 <AnimateOnView
                   as="div"
                   variant="fade-in"
@@ -407,9 +394,7 @@ export default function Home() {
                     className="btn-invert btn-invert--white inline-flex items-center justify-center"
                     style={{ width: '100%', height: '100%' }}
                   >
-                    <span style={{ fontSize: 15, lineHeight: '20px' }}>
-                      Download
-                    </span>
+                    <span style={{ fontSize: 15, lineHeight: '20px' }}>Download</span>
                   </a>
                 </AnimateOnView>
               </div>
@@ -417,25 +402,24 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Build on Section - pixel-perfect */}
-        <section id="buildon" className="relative bg-white h-213">
+        {/* Build on Section - Responsive */}
+        <section id="buildon" className="relative bg-white h-170 py-12 lg:py-0">
           {/* top horizontal line with left-to-right reveal */}
           <AnimateOnView as="div" variant="line-reveal" className="ml-10 mr-10" style={{ marginTop: 30, marginBottom: 30, color: '#000' }} />
           <div className="px-110">
-            <div className="grid grid-736-736" style={{ height: 73, marginBottom: -25 }}>
-              <div className="flex items-center" style={{ width: 736 }}>
+            <div className="grid grid-cols-1 lg:grid-736-736 gap-4 lg:gap-0" style={{ height: 'auto', marginBottom: -25 }}>
+              <div className="flex items-center justify-center lg:justify-start">
                 <Typewriter
                   as="h2"
                   text="Build on"
                   speedMsPerChar={40}
                   cursorWidthPx={10}
-                  className="ml-10 h2-66"
+                  className="ml-10 h2-66 text-center lg:text-left"
                   style={{ fontWeight: 900, color: '#000' }}
                 />
               </div>
               <div
-                className="flex items-center"
-                style={{ width: 736, justifyContent: 'flex-start' }}
+                className="flex items-center justify-center lg:justify-start"
               >
                 {/* Vector logo area 160x40; remove stray border/gap */}
                 <AnimateOnView as="div" variant="fade-in" delay={1} className="ml-246" style={{ width: 160, height: 40 }}>
@@ -515,22 +499,22 @@ export default function Home() {
           {/* bottom horizontal line intentionally removed per design */}
         </section>
 
-        {/* Contact Section - pixel-perfect per provided spec (desktop) */}
+        {/* Contact Section - Responsive */}
         <section
           id="contact"
-          className="relative text-white"
-          style={{ height: 1063, backgroundColor: '#000' }}
+          className="relative text-white py-16 lg:py-0"
+          style={{ height: 'auto', backgroundColor: '#000' }}
         >
           <div className="px-110" style={{ paddingTop: 84 }}>
-            {/* Top row: heading and intro copy (304px tall) */}
-            <div className="grid grid-500-972 h-304">
+            {/* Top row: heading and intro copy - responsive */}
+            <div className="grid grid-cols-1 lg:grid-500-972 h-304 gap-8 lg:gap-0">
               {/* Left column: Contact heading */}
-              <div className="relative">
+              <div className="relative text-center lg:text-left">
                 <AnimateOnView
                   as="h2"
                   variant="slide-up"
+                  className="ml-10"
                   style={{
-                    marginLeft: 10,
                     fontSize: 66,
                     lineHeight: '73px',
                     letterSpacing: '-2px',
@@ -544,7 +528,7 @@ export default function Home() {
                 </div>
 
               {/* Right column: Get in Touch + description */}
-              <div className="relative">
+              <div className="relative text-center lg:text-left">
                 <AnimateOnView
                   as="p"
                   variant="zoom-in"
@@ -558,8 +542,8 @@ export default function Home() {
                   as="p"
                   variant="slide-up"
                   delay={2}
-                  className="ml-325 text-33xb"
-                  style={{ maxWidth: 530, color: '#fff', marginBottom: 10 }}
+                  className="ml-325 text-33xb max-w-lg mx-auto lg:mx-0"
+                  style={{ maxWidth: 530, color: '#fff', marginBottom: 10, margin: '0 auto 10px' }}
                 >
                   Have a question or want to learn more about our app solutions?
                   Reach out to us today.
@@ -567,17 +551,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Bottom row: form block (569px tall) */}
-            <div className="grid grid-500-972 h-569 mb-10">
+            {/* Bottom row: form block - responsive */}
+            <div className="grid grid-cols-1 lg:grid-500-972 h-669 mb-10 gap-8 lg:gap-0">
               {/* Left column empty per spec */}
-              <div />
+              <div className="hidden lg:block" />
 
-              {/* Right column: form container 500x555 with offsets */}
+              {/* Right column: form container - responsive positioning */}
               <div className="relative">
-                <div style={{ marginTop: 7, marginBottom: 5, marginLeft: 325 }} className="w-500" >
+                <div className="w-full max-w-lg mx-auto lg:mx-0 lg:w-500" style={{ marginTop: 7, marginBottom: 5 }}>
                   <form
                     aria-label="Contact"
-                    className="w-500"
+                    className="w-full lg:w-500"
                   >
                     
                     {/* First name */}
@@ -713,8 +697,8 @@ export default function Home() {
                     <div style={{ height: 43 }}>
                       <button
                         type="button"
-                         className="btn-invert btn-invert--black btn-500x43"
-                         style={{ fontSize: 16, lineHeight: '21px', color: '#fff', padding: '11px 15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                         className="btn-invert btn-invert--black btn-500x43 text-white hover:text-black"
+                         style={{ fontSize: 16, lineHeight: '21px', padding: '11px 15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                       >
                         <span style={{ display: 'block', lineHeight: '19px' }}>
                     Submit

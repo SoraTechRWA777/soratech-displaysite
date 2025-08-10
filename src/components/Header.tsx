@@ -10,6 +10,7 @@ const Header = () => {
   const [isHidden, setIsHidden] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const lastYRef = useRef(0)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const navItems = [
     { label: 'Home', href: '/#home', width: 70 },
@@ -48,6 +49,23 @@ const Header = () => {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isMenuOpen])
 
   // Update active label based on route and scroll
   useEffect(() => {
@@ -98,11 +116,11 @@ const Header = () => {
 
   return (
     <header className={`sticky top-0 left-0 right-0 z-50 h-[75px] header-slide ${isHidden ? 'header-hidden' : ''} ${isScrolled ? 'header-scrolled' : ''}`} style={{ backgroundColor: '#f5f5f5' }}>
-          {/* Header large side paddings ~110px at desktop */}
-      <div className="h-full px-110">
+          {/* Header responsive paddings */}
+      <div className="h-full px-110" ref={menuRef}>
         <nav className="flex items-center h-full w-full justify-between">
-          {/* Left Brand: 33px circle + SORATECH (15px / 23px line-height) - light weight */}
-          <Link href="/" className="flex items-center text-black" aria-label="SoraTech Home" style={{ marginLeft: 12, width: 368 }}>
+          {/* Left Brand: 33px circle + SORATECH responsive adjustments */}
+          <Link href="/" className="flex items-center text-black" aria-label="SoraTech Home" style={{ marginLeft: 12 }}>
             {/* Vector logo: concentric circles (outer #010203, inner #ffffff), 33x33 */}
             <svg
               viewBox="20 20 160 160"
@@ -122,8 +140,8 @@ const Header = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation - right column fixed 1104px; menu block 701x30 centered vertically */}
-          <div className="hidden md:flex items-center justify-end w-1104" style={{ marginLeft: 'auto' }}>
+          {/* Desktop Navigation - responsive width adjustments */}
+          <div className="hidden lg:flex items-center justify-end w-1104" style={{ marginLeft: 'auto' }}>
             <div className="w-701" style={{ height: 30, marginTop: 14, marginBottom: 15, display: 'flex', justifyContent: 'flex-end', overflow: 'hidden' }}>
             {navItems.map((item) => {
               const isActive = activeLabel === item.label
@@ -170,47 +188,64 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2 relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+            <div className="w-6 h-6 flex flex-col justify-center items-center">
               <span
-                className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+                className={`w-6 h-0.5 bg-black transition-all duration-300 absolute ${
+                  isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
                 }`}
               />
               <span
                 className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  isMenuOpen ? 'opacity-0' : ''
+                  isMenuOpen ? 'opacity-0' : 'opacity-100'
                 }`}
               />
               <span
-                className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+                className={`w-6 h-0.5 bg-black transition-all duration-300 absolute ${
+                  isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
                 }`}
               />
             </div>
           </button>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - professional styling matching website vibe */}
             {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 py-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="block py-3 text-black hover:text-gray-600 transition-colors duration-200"
-                style={{ fontSize: 15, lineHeight: 1, padding: '0 5px' }}
-                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                  handleNavClick(e, item.href)
-                  setIsMenuOpen(false)
-                }}
-              >
-                <span className="px-2.5">{item.label}</span>
-              </Link>
-            ))}
+          <div className="lg:hidden bg-white absolute left-0 right-0 top-full shadow-lg z-50 mobile-menu-dropdown" style={{ backgroundColor: '#f5f5f5' }}>
+            <div className="max-h-screen overflow-y-auto">
+              <div className="py-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`
+                      block py-4 transition-colors duration-200 font-normal
+                      ${activeLabel === item.label ? 'text-[#545454]' : 'text-black hover:text-[#545454]'}
+                    `}
+                    style={{ 
+                      fontSize: 15, 
+                      lineHeight: '30px',
+                      paddingLeft: '24px',
+                      paddingRight: '24px',
+                      minHeight: '48px',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
+                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      handleNavClick(e, item.href)
+                      setIsMenuOpen(false)
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              {/* Bottom spacing */}
+              <div className="h-2" style={{ backgroundColor: '#f5f5f5' }} />
+            </div>
           </div>
         )}
       </div>

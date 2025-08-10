@@ -10,13 +10,17 @@ export default function HeroMedia() {
   const COLUMN_WIDTH = 1183
   const parallaxRef = useRef<HTMLDivElement | null>(null)
   const OVERSCAN = 160 // extra pixels to avoid top/bottom gaps
-  const [offset, setOffset] = useState(0)
-  const [scale, setScale] = useState(1)
+  // Avoid React re-renders during parallax to eliminate jank/shaking
+  // keep state setters to satisfy React types, but do not use values
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setOffset] = useState(0)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [__, setScale] = useState(1)
   const rafRef = useRef<number | null>(null)
   const targetRef = useRef(0)
-  const velocityRef = useRef(0)
   const progressRef = useRef(0)
   const posRef = useRef(0)
+  const innerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const computeTarget = () => {
@@ -36,19 +40,22 @@ export default function HeroMedia() {
     }
 
     const step = () => {
-      const STIFFNESS = 0.08
-      const DAMPING = 0.85
+      // Critically damped (no bounce) using simple exponential smoothing
+      const ALPHA = 0.15 // smoothing factor; lower = smoother
       const pos = posRef.current
       const target = targetRef.current
-      let vel = velocityRef.current + (target - pos) * STIFFNESS
-      vel *= DAMPING
-      const nextPos = pos + vel
-      velocityRef.current = vel
-      posRef.current = nextPos
-      setOffset(nextPos)
-      const s = 1 + Math.min(0.04, Math.abs(progressRef.current) * 0.04)
-      setScale(s)
-      if (Math.abs(vel) > 0.05 || Math.abs(target - nextPos) > 0.5) {
+      const nextPos = pos + (target - pos) * ALPHA
+      // Snap to device pixels to remove sub-pixel jitter
+      const dpr = window.devicePixelRatio || 1
+      const snapped = Math.round(nextPos * dpr) / dpr
+      posRef.current = snapped
+      // Apply transform directly to DOM to avoid React re-render thrash
+      const s = 1 + Math.min(0.01, Math.abs(progressRef.current) * 0.01)
+      const el = innerRef.current
+      if (el) {
+        el.style.transform = `translate3d(0, ${snapped}px, 0) scale(${s})`
+      }
+      if (Math.abs(target - nextPos) > 0.3) {
         rafRef.current = requestAnimationFrame(step)
       } else {
         rafRef.current = null
@@ -91,7 +98,20 @@ export default function HeroMedia() {
 
         {/* Right column: simple vertical parallax */}
         <div ref={parallaxRef} className="relative" style={{ width: COLUMN_WIDTH, height: VIEWPORT_HEIGHT, overflow: 'hidden', backgroundColor: '#e6e6e6' }}>
-          <div style={{ position: 'absolute', left: 0, right: 0, top: -OVERSCAN, bottom: -OVERSCAN, transform: `translate3d(0, ${offset}px, 0) scale(${scale})`, willChange: 'transform' }}>
+          <div
+            ref={innerRef}
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: -OVERSCAN,
+              bottom: -OVERSCAN,
+              transform: 'translate3d(0, 0, 0) scale(1)',
+              willChange: 'transform',
+              // Cast to CSSProperties to allow backfaceVisibility key
+              ...( { backfaceVisibility: 'hidden' } as React.CSSProperties ),
+            }}
+          >
             <Image
               src="/assets/images/hero-right.jpg"
               alt="Neon Ring Lights"

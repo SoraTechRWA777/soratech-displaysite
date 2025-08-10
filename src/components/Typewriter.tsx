@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ElementType } from 'react'
 import { useInViewport } from '@/lib/useInViewport'
 
 type Props = {
-  as?: keyof JSX.IntrinsicElements
+  as?: ElementType
   text: string
   speedMsPerChar?: number
   startDelayMs?: number
@@ -42,7 +42,7 @@ export default function Typewriter({
     return () => clearTimeout(startTimer)
   }, [inView, speedMsPerChar, startDelayMs, text.length])
 
-  const Comp: any = as
+  const Comp = as
   const visible = text.slice(0, count)
 
   return (

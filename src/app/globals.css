@@ -196,6 +196,36 @@ body {
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
+/* Mobile menu animations */
+@media (max-width: 1023px) {
+  /* Smooth dropdown animation for mobile menu */
+  .mobile-menu-dropdown {
+    animation: slideDown 0.3s ease-out;
+    border-top: 1px solid #e5e5e5;
+  }
+  
+  /* Professional mobile menu item styling */
+  .mobile-menu-dropdown a {
+    touch-action: manipulation;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .mobile-menu-dropdown a:last-child {
+    border-bottom: none;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Offset default scroll to account for fixed 75px header for in-page anchors */
 :target {
   scroll-margin-top: 80px;
@@ -221,6 +251,14 @@ body {
   margin-left: calc((100% - 980px) / 2);
 }
 
+/* Desktop grid utility matching Wix: left fixed 294px, right fluid */
+@media (min-width: 1024px) {
+  .grid-294-1fr-lg {
+    display: grid;
+    grid-template-columns: 294px 1fr;
+  }
+}
+
 /* Fine-grain utilities used for pixel-perfect alignment */
 .mxw-1280 { max-width: 1280px; }
 .text-15 { font-size: 15px; line-height: 1; }
@@ -228,6 +266,13 @@ body {
 .text-14 { font-size: 14px; line-height: 1.4; }
 .text-16 { font-size: 16px; line-height: 1.6; }
 .h-75 { height: 75px; }
+
+/* Desktop-only copyright margin adjustment */
+@media (min-width: 1024px) {
+  .footer-copy-mt {
+    margin-top: 175px !important;
+  }
+}
 
 .section {
   padding: 4rem 0;
@@ -311,10 +356,16 @@ body {
 .h-1063 { height: 1063px; }
 .h-766 { height: 766px; }
 .h-565 { height: 565px; }
+.h-669 {
+  height: 669px;
+}
 .h-569 { height: 569px; }
 .h-304 { height: 304px; }
 .h-238 { height: 238px; }
 .h-213 { height: 213px; }
+.h-170 {
+  height: 170px;
+}
 .h-155 { height: 155px; }
 .h-149 { height: 149px; }
 .h-120 { height: 120px; }
@@ -350,23 +401,312 @@ body {
 .w-1104 { width: 1104px; }
 .w-701 { width: 701px; }
 
-/* Responsive overrides */
-@media (max-width: 1024px) {
-  .px-110, .px-120 { padding-left: 64px; padding-right: 64px; }
-  .grid-736-736, .grid-294-1178, .grid-500-972 { grid-template-columns: 1fr; }
-  .h-565, .h-766, .h-213, .h-149, .h-155, .h-238 { height: auto; }
-  .h2-66 { font-size: 48px; line-height: 56px; }
-  .h1-hero { font-size: 96px; letter-spacing: -4px; }
-  .ml-655, .ml-394, .ml-246, .ml-74, .ml-73, .ml-42 { margin-left: 10px; }
-  .btn-485x48, .btn-500x43, .w-500 { width: 100%; }
+/* Responsive overrides - Tablet (768px - 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  /* Container adjustments for tablet */
+  .px-110, .px-120 { padding-left: 40px; padding-right: 40px; }
+  
+  /* Header brand adjustments */
+  header nav a[aria-label="SoraTech Home"] { margin-left: 0 !important; }
+  
+  /* Hero section adjustments */
+  .subtitle-hero { margin-left: 0 !important; }
+  
+  /* Grid systems become single column with proper spacing */
+  .grid-736-736, .grid-294-1178, .grid-500-972 { 
+    grid-template-columns: 1fr; 
+    gap: 3rem;
+  }
+  
+  /* About section specific fixes for tablet */
+  #about .grid {
+    gap: 4rem !important;
+  }
+  
+  #about .relative > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  #about .ml-10 {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+  
+  /* Auto heights for sections with proper padding */
+  .h-565, .h-766, .h-213, .h-149, .h-155, .h-238, .h-304, .h-569 { 
+    height: auto; 
+    padding-bottom: 3rem;
+  }
+  
+  /* Section padding for tablet */
+  section { padding-bottom: 3rem !important; }
+  .section { padding-bottom: 4rem !important; }
+  
+  /* Typography scaling */
+  .h2-66 { font-size: 52px; line-height: 60px; }
+  .h1-hero { font-size: 120px; letter-spacing: -6px; }
+  
+  /* Remove specific left margins in favor of center alignment */
+  .ml-655, .ml-394, .ml-325, .ml-246, .ml-74, .ml-73, .ml-42 { margin-left: 0; text-align: center; }
+  
+  /* Button and width adjustments */
+  .btn-485x48, .btn-500x43, .w-500 { width: 100%; max-width: 500px; margin: 0 auto; }
   .w-1104, .w-701 { width: 100%; }
+  
+  /* Text alignment adjustments */
+  .text-33b, .text-33xb { text-align: center; }
+  
+  /* Solution section - each row as 2-column layout (title left, list right) */
+  #solution .grid-294-1178 {
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  #solution .ul-ml-8 { 
+    text-align: left; 
+    list-style: disc; 
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+  #solution .li-ml-20 { 
+    margin-left: 0; 
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+  
+  /* White paper section centering */
+  #whitepaper .grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  #whitepaper .ml-10 {
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+  
+  #whitepaper .ml-246 {
+    margin-left: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #whitepaper .flex {
+    justify-content: center !important;
+  }
+  
+  /* Build on section centering */
+  #buildon .grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  #buildon .ml-10 {
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+  
+  #buildon .ml-246 {
+    margin-left: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #buildon .flex {
+    justify-content: center !important;
+  }
+  
+  #buildon { 
+    padding-bottom: 4rem !important; 
+  }
+  
+  /* Contact section form centering and responsiveness */
+  #contact .grid-500-972 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  #contact .w-full {
+    max-width: 600px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+  
+  #contact .contact-input,
+  #contact .contact-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  #contact .btn-500x43 {
+    width: 100% !important;
+    max-width: 600px !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Footer fixes - align copyright with email */
+  footer .grid {
+    align-items: end;
+  }
+  
+  footer .text-center:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+  }
 }
-@media (max-width: 768px) {
-  #home .grid.grid-cols-2 { grid-template-columns: 1fr !important; }
-}
-@media (max-width: 640px) {
-  .px-110, .px-120 { padding-left: 16px; padding-right: 16px; }
-  .h2-66 { font-size: 40px; line-height: 48px; }
-  .h1-hero { font-size: 56px; letter-spacing: -2px; }
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+  /* Container adjustments for mobile */
+  .px-110, .px-120 { padding-left: 20px; padding-right: 20px; }
+  
+  /* Header brand adjustments */
+  header nav a[aria-label="SoraTech Home"] { margin-left: 0 !important; }
+  
+  /* Hero section adjustments */
+  .subtitle-hero { margin-left: 0 !important; }
+  
+  /* Grid systems become single column */
+  .grid-736-736, .grid-294-1178, .grid-500-972 { 
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+  }
+  
+  /* Auto heights for sections with proper padding */
+  .h-565, .h-766, .h-213, .h-149, .h-155, .h-238, .h-304, .h-569 { 
+    height: auto; 
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+  
+  /* Section-specific padding adjustments */
+  section { padding-bottom: 3rem !important; }
+  .section { padding-bottom: 4rem !important; }
+  
+  /* Better spacing for mobile elements */
+  .mt-86, .mt-84 { margin-top: 2rem !important; }
+  .mb-64, .mb-31 { margin-bottom: 2rem !important; }
+  
+  /* Typography scaling for mobile */
+  .h2-66 { font-size: 36px; line-height: 42px; }
+  .h1-hero { font-size: 48px; letter-spacing: -2px; }
   .subtitle-hero { font-size: 14px; line-height: 20px; }
+  .text-33b, .text-33xb { font-size: 24px; line-height: 30px; text-align: center; }
+  .text-17 { font-size: 16px; line-height: 22px; }
+  
+  /* Remove all specific left margins for mobile */
+  .ml-655, .ml-394, .ml-325, .ml-246, .ml-74, .ml-73, .ml-42, .ml-23 { margin-left: 0; }
+  
+  /* Button and width adjustments */
+  .btn-485x48, .btn-500x43, .w-500 { width: 100%; }
+  .btn-160x50, .btn-142x40 { width: 100%; min-width: 160px; }
+  .w-1104, .w-701 { width: 100%; }
+  
+  /* Center align content */
+  .text-33b, .text-33xb, .text-17 { text-align: center; }
+  
+  /* List adjustments */
+  .ul-disc { padding-left: 20px; }
+  .li-ml-23, .li-ml-20 { margin-left: 0; }
+  
+  /* Solution section list centering */
+  #solution .ul-ml-8 { 
+    text-align: left; 
+    list-style: disc; 
+    padding-left: 1.5rem;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  #solution .li-ml-20 { 
+    margin-left: 0; 
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+  
+  /* Build on section padding fix */
+  #buildon { 
+    padding-bottom: 4rem !important; 
+  }
+  
+  /* Contact section button centering */
+  #contact .btn-500x43 {
+    display: block !important;
+    margin: 0 auto !important;
+  }
+  
+  /* White Paper page mobile adjustments */
+  .whitepaper-page ul {
+    text-align: left !important;
+    padding-left: 20px !important;
+  }
+  .whitepaper-page li {
+    margin-left: 0 !important;
+  }
+  
+  /* Contact form adjustments */
+  .contact-input, .contact-textarea { width: 100% !important; }
+  .w-1452 { width: 100%; }
+}
+
+/* Preserve exact desktop layout for screens 1200px and above */
+@media (min-width: 1200px) {
+  /* Ensure desktop layout remains exactly as designed */
+  .px-110 { padding-left: 110px; padding-right: 110px; }
+  .px-120 { padding-left: 120px; padding-right: 120px; }
+  
+  /* About section desktop positioning */
+  [data-desktop-style] {
+    position: absolute !important;
+    top: 58px !important;
+    left: 20px !important;
+    width: 660px !important;
+    height: 477px !important;
+  }
+  
+  /* Desktop text positioning */
+  #about .relative > div {
+    margin-top: 58px !important;
+    height: 477px !important;
+  }
+  
+  /* Hero subtitle desktop positioning */
+  .subtitle-hero { margin-left: 23px !important; }
+  
+  /* Solution section desktop positioning */
+  #solution .max-w-lg { margin-left: 394px !important; margin-right: auto; width: 500px !important; }
+  #solution .text-33b { margin-left: 655px !important; margin-right: auto; }
+  
+  /* Footer desktop positioning */
+  footer .grid { grid-template-columns: 736px 736px !important; }
+  footer .ml-32 { margin-left: 32px !important; }
+  footer .ml-44 { margin-left: 44px !important; }
+  
+  /* Whitepaper and Build On desktop positioning */
+  #whitepaper .grid { grid-template-columns: 736px 736px !important; height: 99px !important; }
+  #buildon .grid { grid-template-columns: 736px 736px !important; height: 73px !important; }
+  
+  /* Contact section desktop positioning */
+  #contact .grid { grid-template-columns: 500px 972px !important; }
+  #contact .w-full { width: 500px !important; margin-left: 325px !important; }
+    #contact .w-full form {
+      margin-left: 0 !important;
+    }
+  #contact .ml-325 { margin-left: 325px !important; }
+  #contact section { height: 1063px !important; }
+  
+  /* White Paper page desktop positioning */
+  .whitepaper-page section:first-of-type { height: 409px !important; }
+  .whitepaper-page .max-w-full { width: 1276px !important; }
+  .whitepaper-page .mt-8 { position: absolute !important; left: 603px !important; bottom: 0 !important; width: 485px !important; }
+  .whitepaper-page .mt-8 a { width: 100% !important; height: 48px !important; }
 }
