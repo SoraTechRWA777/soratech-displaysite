@@ -528,17 +528,11 @@ body {
   }
   
   /* Contact section form centering and responsiveness */
-  #contact .grid-500-972 {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    justify-content: center;
-  }
+  #contact .grid-500-972 { grid-template-columns: 1fr; gap: 2rem; justify-content: center; }
   
-  #contact .w-full {
-    max-width: 600px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-  }
+  /* Shift the right block left progressively on tablet */
+  #contact .ml-325 { margin-left: 0 !important; }
+  #contact .w-full { max-width: 560px !important; width: 100% !important; margin: 0 auto !important; }
   
   #contact .contact-input,
   #contact .contact-textarea {
@@ -709,4 +703,81 @@ body {
   .whitepaper-page .max-w-full { width: 1276px !important; }
   .whitepaper-page .mt-8 { position: absolute !important; left: 603px !important; bottom: 0 !important; width: 485px !important; }
   .whitepaper-page .mt-8 a { width: 100% !important; height: 48px !important; }
+}
+
+/* Desktop mid-range (1366px–1699px): tighten layout without affecting ≥1700px */
+@media (max-width: 1699px) and (min-width: 1366px) {
+  /* Hero title slightly smaller and tighter tracking */
+  .h1-hero { font-size: 150px; letter-spacing: -6px; }
+
+  /* Two-column fixed grids scaled down to prevent overflow */
+  .grid-736-736 { grid-template-columns: 560px 560px; }
+  .grid-294-1178 { grid-template-columns: 260px 880px; }
+  .grid-500-972 { grid-template-columns: 420px 680px; }
+
+  /* About image absolute sizing adjusted to avoid title overlap */
+  [data-desktop-style] {
+    width: 560px !important;
+    height: 405px !important;
+    top: 40px !important;
+    left: 10px !important;
+  }
+  #about .relative > div { margin-top: 40px !important; height: 405px !important; }
+
+  /* Contact form widths to fit column */
+  #contact .px-110 { padding-left: 60px; padding-right: 60px; }
+  #contact .ml-325 { margin-left: 240px !important; }
+  #contact .w-full { width: 420px !important; margin-left: 0 !important; }
+  #contact .contact-input, #contact .contact-textarea { width: 420px !important; }
+  #contact .btn-500x43 { width: 420px !important; }
+
+  /* Footer columns to keep copyright in view */
+  footer .grid { grid-template-columns: 560px 560px !important; }
+}
+
+/* Desktop narrow (1200px–1365px): ensure contact right block fits and shifts left */
+@media (max-width: 1365px) and (min-width: 1200px) {
+  /* Contact container side paddings slightly reduced */
+  #contact .px-110 { padding-left: 48px; padding-right: 48px; }
+
+  /* Narrow the grid so the right column fits the viewport */
+  .grid-500-972 { grid-template-columns: 380px 620px; }
+
+  /* Shift subtitle left and keep form under it */
+  #contact .ml-325 { margin-left: 200px !important; }
+
+  /* Constrain form widths to keep everything visible */
+  #contact .w-full { width: 380px !important; margin-left: 0 !important; }
+  #contact .contact-input, #contact .contact-textarea { width: 380px !important; }
+  #contact .btn-500x43 { width: 380px !important; }
+
+  /* Global paddings slightly reduced to gain space */
+  .px-110 { padding-left: 56px; padding-right: 56px; }
+  .px-120 { padding-left: 64px; padding-right: 64px; }
+
+  /* Hero: reduce title size/tracking a bit */
+  .h1-hero { font-size: 130px; letter-spacing: -5px; }
+  .h-238 { height: 200px; }
+
+  /* Two-column fixed grids compressed */
+  .grid-736-736 { grid-template-columns: 520px 520px; }
+  .grid-294-1178 { grid-template-columns: 240px 760px; }
+
+  /* About: prevent heading overlap with image */
+  [data-desktop-style] {
+    width: 520px !important;
+    height: 380px !important;
+    top: 32px !important;
+    left: 8px !important;
+  }
+  #about .relative > div { margin-top: 32px !important; height: 380px !important; }
+
+  /* Solution: keep intro and lists within view */
+  #solution .text-33b { margin-left: 560px !important; }
+  #solution .max-w-lg { width: 420px !important; margin-left: 320px !important; }
+  #solution .ul-ml-8 { max-width: 520px; }
+
+  /* Whitepaper & Build on: line up and keep centered when needed */
+  #whitepaper .ml-246, #buildon .ml-246 { margin-left: 180px !important; }
+  footer .grid { grid-template-columns: 520px 520px !important; }
 }
