@@ -101,13 +101,14 @@ export default function Home() {
                     height: 477,
                   }}
                 >
-                <Image 
-                  src="/assets/images/about.jpeg"
-                  alt="Professional woman working with technology"
-                    width={660}
-                    height={477}
-                    className="object-cover w-full h-auto lg:w-[660px] lg:h-[477px]"
-                  />
+                 <Image 
+                   src="/assets/images/about.jpeg"
+                   alt="Professional woman working with technology"
+                   width={660}
+                   height={477}
+                   sizes="(min-width: 1200px) 660px, 100vw"
+                   className="object-cover w-full h-auto lg:w-[660px] lg:h-[477px]"
+                 />
                 </div>
               </div>
 

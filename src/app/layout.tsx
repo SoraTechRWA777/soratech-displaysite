@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Modular, compliant, and user-friendly infrastructure for tokenized RWAs",
     type: "website",
     locale: "en_US",
+    url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
   },
   twitter: {
     card: "summary_large_image",
@@ -39,6 +40,10 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {/* Canonical */}
+        {process.env.NEXT_PUBLIC_SITE_URL && (
+          <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL} />
+        )}
       </head>
       <body className="antialiased">
         {children}
