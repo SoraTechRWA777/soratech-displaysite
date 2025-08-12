@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
@@ -20,9 +18,13 @@ export async function POST(req: Request) {
 
     const from = process.env.CONTACT_FROM
     const to = process.env.CONTACT_TO
-    if (!from || !to || !process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!from || !to || !apiKey) {
       return NextResponse.json({ ok: false, error: 'Email service not configured' }, { status: 500 })
     }
+
+    // Lazy-initialize Resend to avoid build-time evaluation
+    const resend = new Resend(apiKey)
 
     await resend.emails.send({
       from,
