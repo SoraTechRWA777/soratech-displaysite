@@ -108,6 +108,16 @@ await fetch('/api/contact', {
 })
 ```
 
+#### How to get a Resend API key
+- Sign up at https://resend.com → Dashboard → API Keys → “Create API Key”.
+- Sender options:
+  - Quick test: use `onboarding@resend.dev` as `CONTACT_FROM` (works for testing; may land in spam).
+  - Production: add your domain in Dashboard → Domains, add DKIM DNS records, then use a verified sender like `no-reply@yourdomain.com`.
+- Set env vars in Vercel (Preview and Production):
+  - `RESEND_API_KEY=your_key_here`
+  - `CONTACT_FROM=verified_sender@yourdomain.com` (or `onboarding@resend.dev` for quick test)
+  - `CONTACT_TO=your_destination@yourdomain.com`
+
 
 ---
 
