@@ -48,7 +48,7 @@ export default function WhitePaperPage() {
                     </li>
                   </ul>
                   <p style={{ fontSize: 15, lineHeight: '23px' }}>&nbsp;</p>
-                  <p className="max-w-lg mx-auto lg:mx-0" style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>We're not just building tools—we're building a new financial system.</p>
+                  <p className="max-w-lg mx-auto lg:mx-0" style={{ fontSize: 15, lineHeight: '23px', margin: 0 }}>We&apos;re not just building tools—we&apos;re building a new financial system.</p>
                 </AnimateOnView>
 
                 {/* Button after text - Responsive positioning */}

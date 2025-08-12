@@ -12,15 +12,22 @@ export function middleware(req: NextRequest) {
   res.headers.set('X-XSS-Protection', '0')
   res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
-  // Basic CSP (tuned for this static site)
+  // Basic CSP (dev allows inline/eval for Next dev overlay & HMR; prod is stricter)
   const self = "'self'"
+  const isDev = process.env.NODE_ENV !== 'production'
+  const scriptSrc = isDev
+    ? `script-src ${self} 'unsafe-inline' 'unsafe-eval' blob:`
+    : `script-src ${self}`
+  const connectSrc = isDev
+    ? `connect-src ${self} ws: http: https:`
+    : `connect-src ${self}`
   const csp = [
     `default-src ${self}`,
-    `script-src ${self}`,
+    scriptSrc,
     `style-src ${self} 'unsafe-inline'`,
     `img-src ${self} data: blob:`,
     `font-src ${self} data:`,
-    `connect-src ${self}`,
+    connectSrc,
     `frame-ancestors 'none'`,
     `base-uri ${self}`,
     `form-action ${self}`,

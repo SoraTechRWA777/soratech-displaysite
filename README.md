@@ -83,6 +83,9 @@ Open http://localhost:3000
 ### Environment variables
 Set in Vercel → Project Settings → Environment Variables:
 - `NEXT_PUBLIC_SITE_URL` (e.g., `https://soratech.example`)
+ - `RESEND_API_KEY` (Resend API key)
+ - `CONTACT_FROM` (Verified sender, e.g., `noreply@soratech.example`)
+ - `CONTACT_TO` (Recipient, e.g., `team@soratech.example`)
 
 ---
 
@@ -91,6 +94,20 @@ Set in Vercel → Project Settings → Environment Variables:
 2) Set `NEXT_PUBLIC_SITE_URL` (production URL)
 3) Use default Next.js settings (App Router)
 4) Deploy a preview → validate responsive ranges → promote to production
+
+### Contact form (email via Resend)
+- API route: `src/app/api/contact/route.ts`
+- Required fields: `firstName`, `lastName`, `email`; basic email format validation
+- Configure env vars above in both Preview and Production
+- Client: submit a POST to `/api/contact` with JSON:
+```ts
+await fetch('/api/contact', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ firstName, lastName, email, phone, message })
+})
+```
+
 
 ---
 
