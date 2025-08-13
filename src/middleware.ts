@@ -17,7 +17,7 @@ export function middleware(req: NextRequest) {
   const isDev = process.env.NODE_ENV !== 'production'
   const scriptSrc = isDev
     ? `script-src ${self} 'unsafe-inline' 'unsafe-eval' blob:`
-    : `script-src ${self}`
+    : `script-src ${self} 'unsafe-inline' blob:`
   const connectSrc = isDev
     ? `connect-src ${self} ws: http: https:`
     : `connect-src ${self}`
