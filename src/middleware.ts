@@ -12,26 +12,43 @@ export function middleware(req: NextRequest) {
   res.headers.set('X-XSS-Protection', '0')
   res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
-  // Basic CSP (dev allows inline/eval for Next dev overlay & HMR; prod is stricter)
+  // Basic CSP (dev allows inline/eval for Next dev overlay & HMR; prod uses nonce)
   const self = "'self'"
   const isDev = process.env.NODE_ENV !== 'production'
-  const scriptSrc = isDev
-    ? `script-src ${self} 'unsafe-inline' 'unsafe-eval' blob:`
-    : `script-src ${self} 'unsafe-inline' blob:`
-  const connectSrc = isDev
-    ? `connect-src ${self} ws: http: https:`
-    : `connect-src ${self}`
-  const csp = [
-    `default-src ${self}`,
-    scriptSrc,
-    `style-src ${self} 'unsafe-inline'`,
-    `img-src ${self} data: blob:`,
-    `font-src ${self} data:`,
-    connectSrc,
-    `frame-ancestors 'none'`,
-    `base-uri ${self}`,
-    `form-action ${self}`,
-  ].join('; ')
+  let csp: string
+  if (isDev) {
+    const scriptSrc = `script-src ${self} 'unsafe-inline' 'unsafe-eval' blob:`
+    const connectSrc = `connect-src ${self} ws: http: https:`
+    csp = [
+      `default-src ${self}`,
+      scriptSrc,
+      `style-src ${self} 'unsafe-inline'`,
+      `img-src ${self} data: blob:`,
+      `font-src ${self} data:`,
+      connectSrc,
+      `frame-ancestors 'none'`,
+      `base-uri ${self}`,
+      `form-action ${self}`,
+    ].join('; ')
+  } else {
+    // Generate per-request nonce and let Next attach it to its inline scripts
+    // This avoids allowing unsafe-inline/eval in production
+    const nonce = crypto.randomUUID().replace(/-/g, '')
+    res.headers.set('x-nonce', nonce)
+    const scriptSrc = `script-src ${self} 'nonce-${nonce}' blob:`
+    const connectSrc = `connect-src ${self}`
+    csp = [
+      `default-src ${self}`,
+      scriptSrc,
+      `style-src ${self} 'unsafe-inline'`,
+      `img-src ${self} data: blob:`,
+      `font-src ${self} data:`,
+      connectSrc,
+      `frame-ancestors 'none'`,
+      `base-uri ${self}`,
+      `form-action ${self}`,
+    ].join('; ')
+  }
   res.headers.set('Content-Security-Policy', csp)
 
   // Aggressive cache for versioned static assets under /assets/
