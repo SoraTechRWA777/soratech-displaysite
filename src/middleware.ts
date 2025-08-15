@@ -31,11 +31,9 @@ export function middleware(req: NextRequest) {
       `form-action ${self}`,
     ].join('; ')
   } else {
-    // Generate per-request nonce and let Next attach it to its inline scripts
-    // This avoids allowing unsafe-inline/eval in production
-    const nonce = crypto.randomUUID().replace(/-/g, '')
-    res.headers.set('x-nonce', nonce)
-    const scriptSrc = `script-src ${self} 'nonce-${nonce}' blob:`
+    // Production: Allow unsafe-inline for Next.js runtime scripts
+    // This is needed because Next.js generates inline scripts that don't use nonces
+    const scriptSrc = `script-src ${self} 'unsafe-inline' blob:`
     const connectSrc = `connect-src ${self}`
     csp = [
       `default-src ${self}`,
